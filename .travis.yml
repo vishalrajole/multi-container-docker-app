@@ -4,18 +4,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t vishalrajole/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t vishalrajole1991/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true vishalrajole/react-test npm test -- --coverage
+  - docker run -e CI=true vishalrajole1991/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t vishalrajole/client ./client
-  - docker build -t vishalrajole/nginx ./nginx
-  - docker build -t vishalrajole/server ./server
-  - docker build -t vishalrajole/worker ./worker
+  - docker build -t vishalrajole1991/client ./client
+  - docker build -t vishalrajole1991/nginx ./nginx
+  - docker build -t vishalrajole1991/server ./server
+  - docker build -t vishalrajole1991/worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push vishalrajole/client
-  - docker push vishalrajole/nginx
-  - docker push vishalrajole/server
-  - docker push vishalrajole/worker
+  - docker push vishalrajole1991/client
+  - docker push vishalrajole1991/nginx
+  - docker push vishalrajole1991/server
+  - docker push vishalrajole1991/worker
