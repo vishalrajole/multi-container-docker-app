@@ -14,8 +14,23 @@ after_success:
   - docker build -t vishalrajole1991/nginx ./nginx
   - docker build -t vishalrajole1991/server ./server
   - docker build -t vishalrajole1991/worker ./worker
+  # docker login authentication for travis cli
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push docker images to docker hub
   - docker push vishalrajole1991/client
   - docker push vishalrajole1991/nginx
   - docker push vishalrajole1991/server
   - docker push vishalrajole1991/worker
+
+deploy:
+  edge: true,
+  provider elasticbeanstalk:
+  region: us-east-1
+  app: multi-container-docker
+  env: MultiContainerDocker-env
+  bucket_name: elasticbeanstalk-us-east-1-410956674706
+  bucket_path: multi-container-docker-app
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
